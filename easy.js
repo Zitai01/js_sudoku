@@ -1,5 +1,20 @@
 let gamestate = true
 let keySelected = 0
+//pre-fill the board and add preFilled class to them
+let preFillEasy = [
+  [0, 4, 0, 0, 0, 5, 6, 3, 0],
+  [5, 0, 0, 6, 0, 9, 0, 2, 7],
+  [0, 7, 0, 8, 3, 1, 5, 4, 0],
+  [7, 0, 4, 0, 6, 0, 0, 0, 0],
+  [0, 0, 0, 0, 5, 3, 0, 0, 6],
+  [0, 0, 6, 2, 8, 4, 0, 5, 0],
+  [3, 8, 7, 0, 0, 0, 5, 1, 6],
+  [0, 0, 0, 1, 0, 5, 0, 0, 0],
+  [4, 0, 0, 0, 0, 3, 9, 2, 0]
+]
+
+// use gameArray to track game status
+let gameArray = preFillEasy
 
 let gameboard = document.querySelector('.gameboard')
 console.log(gameboard)
@@ -84,6 +99,7 @@ function checkWrong1() {
 //new simpilified checkwrong with filter function
 function checkWrong() {
   let bigblocks = document.querySelectorAll('.bigBlock')
+  let smallblocks = document.querySelectorAll('.block')
   let duplicas = []
   //check each box
   for (let i = 0; i < 9; i++) {
@@ -103,9 +119,30 @@ function checkWrong() {
   //check each row and column for duplicates
   let row = rows()
   let column = columns()
+  let gameArray81 = convertgameArray()
+
+  //convert single 81 array to 9 row's array
+  let rowArray = gameArray
+  for (let i = 0; i < 81; i++) {
+    let j = Math.floor(i / 9)
+    let k = i % 9
+    rowArray[j][k] = gameArray81[i]
+  }
   for (let i = 0; i < 9; i++) {
-    let rowsDup = checkDuplicates(row[i])
-    console.log(rowsDup)
+    let duplicatesrow = checkDuplicates(rowArray[i])
+    if (duplicatesrow.length > 0) {
+      for (let j = 0; j < 9; j++) {
+        if (rowArray[i][j] == duplicatesrow[0]) {
+          let k =
+            Math.floor(i / 3) * 27 +
+            (i % 3) * 3 +
+            Math.floor(j / 3) * 9 +
+            (j % 3)
+          console.log(i, j)
+          smallblocks[k].style.color = 'red'
+        }
+      }
+    }
   }
 }
 // define row array
@@ -124,7 +161,8 @@ function rows() {
 
   return row
 }
-
+let rowexample = rows()
+console.log(rowexample)
 // define column array
 function columns() {
   let columns = [[], [], [], [], [], [], [], [], []]
@@ -144,21 +182,27 @@ function checkDuplicates(array) {
   })
   return result
 }
+//convert 9x9arrays in to a single 81 element array.
+function convertgameArray() {
+  let newArray = []
+  let row1 = rows()
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (row1[i][j] < 9) {
+        newArray.push(gameArray[0][row1[i][j]])
+      } else if (row1[i][j] >= 9) {
+        let k = Math.floor(row1[i][j] / 9)
+        let m = row1[i][j] % 9
+        newArray.push(gameArray[k][m])
+      }
+    }
+  }
+  return newArray
+}
 
 //checkwin checks winning situation
 function checkWin() {}
-//pre-fill the board and add preFilled class to them
-let preFillEasy = [
-  [0, 4, 0, 0, 0, 5, 6, 3, 0],
-  [5, 0, 0, 6, 0, 9, 0, 2, 7],
-  [0, 7, 0, 8, 3, 1, 5, 4, 0],
-  [7, 0, 4, 0, 6, 0, 0, 0, 0],
-  [0, 0, 0, 0, 5, 3, 0, 0, 6],
-  [0, 0, 6, 2, 8, 4, 0, 5, 0],
-  [3, 8, 7, 0, 0, 0, 5, 1, 6],
-  [0, 0, 0, 1, 0, 5, 0, 0, 0],
-  [4, 0, 0, 0, 0, 3, 9, 2, 0]
-]
+
 function prefill(array) {
   let bigblocks = document.querySelectorAll('.bigBlock')
   for (let i = 0; i < 9; i++) {
@@ -171,8 +215,6 @@ function prefill(array) {
   }
 }
 prefill(preFillEasy)
-// use gameArray to track game status
-let gameArray = preFillEasy
 
 //Add 'click' eventlisteners to keyboard store it's value in a variable
 // and highlight the selected value.
@@ -228,3 +270,4 @@ for (let i = 0; i < bigblocks.length; i++) {
     })
   }
 }
+//testing stuff

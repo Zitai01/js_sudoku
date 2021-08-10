@@ -9,10 +9,11 @@ body{
 h1{
     font-family: 'Patrick Hand', cursive;
     font-size: 52px;
+    margin: 30px 0 60px 0;
 }
 .gameboard{
-    width: 468px;
-    height: 468px;
+    width: 471px;
+    height: 471px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -20,8 +21,8 @@ h1{
    
 }
 .menu{
-    width: 500px;
-    height: 500px;
+    width: 468px;
+    height: 468px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -31,7 +32,7 @@ h1{
 .bigBlock{
     width: 153px;
     height: 153px;
-    border: solid 1.5px ;
+    border: solid 2px ;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -88,9 +89,21 @@ button:hover {
 }
 .level{
     margin:30px;
-    background-color:chartreuse; 
+    
     font-size:35px
 }
 a{
     text-decoration: none;
+}
+nav{
+    display: flex;
+    justify-content: center;
+    
+}
+.topBar{
+    margin: 10px;
+    margin-right: 5px;
+}
+.scoreBar{
+    margin-left: 0;
 }

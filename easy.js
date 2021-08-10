@@ -1,5 +1,7 @@
 let gamestate = true
 let keySelected = 0
+let userScore = 0
+let scoreBar = document.querySelector('.scoreBar')
 //pre-fill the board and add preFilled class to them
 /*
 let preFillEasy = [
@@ -75,11 +77,8 @@ function initBoard() {
   for (let i = 0; i < 9; i++) {
     let block = document.createElement('div')
     block.classList.add('bigBlock')
-    if (i % 2 == 0) {
-      block.style.backgroundColor = 'darkgray'
-    } else if (i % 2 == 1) {
-      block.style.backgroundColor = 'gray'
-    }
+
+    block.style.backgroundColor = 'darkgray'
 
     gameboard.appendChild(block)
   }
@@ -89,11 +88,9 @@ function initBoard() {
     for (let j = 0; j < 9; j++) {
       let block = document.createElement('button')
       block.classList.add('block')
-      if (j % 2 == 0) {
-        block.style.backgroundColor = 'darkgray'
-      } else if (j % 2 == 1) {
-        block.style.backgroundColor = 'gray'
-      }
+
+      block.style.backgroundColor = 'darkgray'
+
       //block.innerHTML = `${j}`
       largerBlocks[i].appendChild(block)
     }
@@ -292,6 +289,8 @@ function checkWin() {
   }
   if (allRed(smallblocks) == true) {
     console.log('You win')
+    userScore += 1
+    scoreBar.innerHTML = userScore
     smallblocks.forEach((element) => {
       element.style.color = 'green'
     })
@@ -325,7 +324,26 @@ for (let i = 0; i < 10; i++) {
     keyBlocks[i].style.color = 'yellowgreen'
   })
 }
-
+//Add 'keydown' eventlisteners
+let body = document.querySelector('body')
+body.addEventListener('keydown', (e) => {
+  console.log(e.code)
+  for (let i = 1; i < 10; i++) {
+    if (e.code == `Digit${i}`) {
+      keySelected = i
+      keyBlocks.forEach((element) => {
+        element.style.color = 'black'
+      })
+      keyBlocks[i - 1].style.color = 'yellowgreen'
+    } else if (e.code == 'Backquote') {
+      keySelected = 10
+      keyBlocks.forEach((element) => {
+        element.style.color = 'black'
+      })
+      keyBlocks[9].style.color = 'yellowgreen'
+    }
+  }
+})
 //fillin the blocks when clicked with selected value
 //this also updates the gamestatus and checking winning situation.
 

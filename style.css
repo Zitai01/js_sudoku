@@ -1,4 +1,5 @@
 body{
+    font-family: 'Patrick Hand', cursive;
     background-color:lightseagreen;
     display: flex;
     flex-direction: column;
@@ -106,4 +107,22 @@ nav{
 }
 .scoreBar{
     margin-left: 0;
+}
+.popup{
+    font-family: 'Patrick Hand', cursive;
+    z-index: 3;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 320px;
+    background-color: lightseagreen;
+    text-align: center;
+    margin: 20px;
+    font-size: 42px;
+    border: oldlace solid 2px;
+}
+.inside_popup{
+    font-family: 'Patrick Hand', cursive;
+    display: flex;
+    margin: 25px 20px 10px 20px;
 }

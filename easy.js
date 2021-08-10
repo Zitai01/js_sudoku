@@ -2,6 +2,7 @@ let gamestate = true
 let keySelected = 0
 let userScore = 0
 let scoreBar = document.querySelector('.scoreBar')
+let popupBar = document.querySelector('.popup')
 //pre-fill the board and add preFilled class to them
 /*
 let preFillEasy = [
@@ -174,7 +175,7 @@ function checkWrong() {
             (i % 3) * 3 +
             Math.floor(j / 3) * 9 +
             (j % 3)
-          console.log(k)
+
           smallblocks[k].style.color = 'red'
         }
       }
@@ -191,7 +192,7 @@ function checkWrong() {
             (j % 3) * 3 +
             Math.floor(i / 3) * 9 +
             (i % 3)
-          console.log(k)
+
           smallblocks[k].style.color = 'red'
         }
       }
@@ -291,9 +292,15 @@ function checkWin() {
     console.log('You win')
     userScore += 1
     scoreBar.innerHTML = userScore
+
     smallblocks.forEach((element) => {
       element.style.color = 'green'
     })
+    gamestate = false
+    setTimeout(() => {
+      popupBar.style.display = 'flex'
+    }, 300)
+
     return true
   }
 }
@@ -327,7 +334,6 @@ for (let i = 0; i < 10; i++) {
 //Add 'keydown' eventlisteners
 let body = document.querySelector('body')
 body.addEventListener('keydown', (e) => {
-  console.log(e.code)
   for (let i = 1; i < 10; i++) {
     if (e.code == `Digit${i}`) {
       keySelected = i

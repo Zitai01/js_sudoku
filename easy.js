@@ -85,6 +85,7 @@ function checkWrong1() {
 function checkWrong() {
   let bigblocks = document.querySelectorAll('.bigBlock')
   let duplicas = []
+  //check each box
   for (let i = 0; i < 9; i++) {
     let duplicatesArray = checkDuplicates(gameArray[i])
 
@@ -95,11 +96,47 @@ function checkWrong() {
           duplicas.push([i, j])
         }
       }
-      console.log(duplicas)
+
       return duplicas
     }
   }
+  //check each row and column for duplicates
+  let row = rows()
+  let column = columns()
+  for (let i = 0; i < 9; i++) {
+    let rowsDup = checkDuplicates(row[i])
+    console.log(rowsDup)
+  }
 }
+// define row array
+function rows() {
+  // let allboard = document.querySelectorAll('.block')
+  let row = [[], [], [], [], [], [], [], [], []]
+  for (let i = 0; i < 81; i++) {
+    if (i % 9 < 3) {
+      row[Math.floor(i / 27) * 3].push(i)
+    } else if (i % 9 < 6 && i % 9 > 2) {
+      row[Math.floor(i / 27) * 3 + 1].push(i)
+    } else if (i % 9 >= 6) {
+      row[Math.floor(i / 27) * 3 + 2].push(i)
+    }
+  }
+
+  return row
+}
+
+// define column array
+function columns() {
+  let columns = [[], [], [], [], [], [], [], [], []]
+  let row = rows()
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      columns[i].push(row[j][i])
+    }
+  }
+  return columns
+}
+
 //check duplicate of an array return duplicated numbers in an array
 function checkDuplicates(array) {
   let result = array.filter((value, index) => {
@@ -167,17 +204,24 @@ for (let i = 0; i < bigblocks.length; i++) {
         if (keySelected != 0 && keySelected != 10) {
           gameArray[i][j] = keySelected
           bigblocks[i].children[j].style.color = 'orange'
+          bigblocks[i].children[j].classList.add('userSelected')
           bigblocks[i].children[j].innerHTML = keySelected
           checkWrong()
           gameArray[i][j] = keySelected
           // set up delete button and unred the blocks that has no duplicates
         } else if (keySelected == 10) {
-          baiscBlocks.forEach((element) => {
-            element.style.color = 'black'
-          })
           bigblocks[i].children[j].innerHTML = ''
           bigblocks[i].children[j].style.color = 'black'
           gameArray[i][j] = 0
+          bigblocks[i].children[j].classList.remove('userSelected')
+          baiscBlocks.forEach((element) => {
+            if (element.classList.contains('userSelected') == false) {
+              element.style.color = 'black'
+            } else if (element.classList.contains('userSelected') == true) {
+              element.style.color = 'orange'
+            }
+          })
+
           checkWrong()
         }
       }

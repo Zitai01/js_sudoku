@@ -14,7 +14,30 @@ let preFillEasy = [
 ]
 
 // use gameArray to track game status
-let gameArray = preFillEasy
+
+let gameArray = [
+  [0, 4, 0, 0, 0, 5, 6, 3, 0],
+  [5, 0, 0, 6, 0, 9, 0, 2, 7],
+  [0, 7, 0, 8, 3, 1, 5, 4, 0],
+  [7, 0, 4, 0, 6, 0, 0, 0, 0],
+  [0, 0, 0, 0, 5, 3, 0, 0, 6],
+  [0, 0, 6, 2, 8, 4, 0, 5, 0],
+  [3, 8, 7, 0, 0, 0, 5, 1, 6],
+  [0, 0, 0, 1, 0, 5, 0, 0, 0],
+  [4, 0, 0, 0, 0, 3, 9, 2, 0]
+]
+let gameArray81 = convertgameArray(gameArray)
+let rowArray = [
+  [0, 4, 0, 0, 0, 5, 6, 3, 0],
+  [5, 0, 0, 6, 0, 9, 0, 2, 7],
+  [0, 7, 0, 8, 3, 1, 5, 4, 0],
+  [7, 0, 4, 0, 6, 0, 0, 0, 0],
+  [0, 0, 0, 0, 5, 3, 0, 0, 6],
+  [0, 0, 6, 2, 8, 4, 0, 5, 0],
+  [3, 8, 7, 0, 0, 0, 5, 1, 6],
+  [0, 0, 0, 1, 0, 5, 0, 0, 0],
+  [4, 0, 0, 0, 0, 3, 9, 2, 0]
+]
 
 let gameboard = document.querySelector('.gameboard')
 console.log(gameboard)
@@ -64,18 +87,11 @@ function initBoard() {
   }
   keyboard.children[9].innerHTML = 'X'
 }
-//test function to familiar with js selector
-function backgroundTest() {
-  let keys = document.querySelectorAll('.keyblock')
-  for (let i = 0; i < keys.length; i++) {
-    //   keys[i].style.backgroundColor = 'darkgray'
-  }
-}
+
 initBoard()
-backgroundTest()
-//checkwrong will makes any wrong answer red and return the wrong value
+
 //not used anymore.
-function checkWrong1() {
+/*function checkWrong1() {
   //check each bigblock if it has duplicate numbers
   let bigblocks = document.querySelectorAll('.bigBlock')
   let checkbox = []
@@ -95,12 +111,13 @@ function checkWrong1() {
     }
   }
 }
-
+*/
+//checkwrong will makes any conlict numbers red
 //new simpilified checkwrong with filter function
 function checkWrong() {
   let bigblocks = document.querySelectorAll('.bigBlock')
   let smallblocks = document.querySelectorAll('.block')
-  let duplicas = []
+  //let duplicas = []
   //check each box
   for (let i = 0; i < 9; i++) {
     let duplicatesArray = checkDuplicates(gameArray[i])
@@ -109,25 +126,23 @@ function checkWrong() {
       for (let j = 0; j < 9; j++) {
         if (gameArray[i][j] == duplicatesArray[0]) {
           bigblocks[i].children[j].style.color = 'red'
-          duplicas.push([i, j])
+
+          //        duplicas.push([i, j])
         }
       }
 
-      return duplicas
+      //     return duplicas
     }
   }
   //check each row and column for duplicates
-  let row = rows()
-  let column = columns()
-  let gameArray81 = convertgameArray()
+  //let row = rows()
+  //let column = columns()
 
   //convert single 81 array to 9 row's array
-  let rowArray = gameArray
-  for (let i = 0; i < 81; i++) {
-    let j = Math.floor(i / 9)
-    let k = i % 9
-    rowArray[j][k] = gameArray81[i]
-  }
+  // let rowArray =gameArray
+  console.log(gameArray)
+  console.log(gameArray81)
+  console.log(rowArray)
   for (let i = 0; i < 9; i++) {
     let duplicatesrow = checkDuplicates(rowArray[i])
     if (duplicatesrow.length > 0) {
@@ -138,11 +153,21 @@ function checkWrong() {
             (i % 3) * 3 +
             Math.floor(j / 3) * 9 +
             (j % 3)
-          console.log(i, j)
+          console.log(k)
           smallblocks[k].style.color = 'red'
         }
       }
     }
+  }
+}
+
+function updatesArrays() {
+  gameArray81 = convertgameArray(gameArray)
+  console.log(gameArray81)
+  for (let i = 0; i < 81; i++) {
+    let j = Math.floor(i / 9)
+    let k = i % 9
+    rowArray[j][k] = gameArray81[i]
   }
 }
 // define row array
@@ -161,8 +186,8 @@ function rows() {
 
   return row
 }
-let rowexample = rows()
-console.log(rowexample)
+//let rowexample = rows()
+//console.log(rowexample)
 // define column array
 function columns() {
   let columns = [[], [], [], [], [], [], [], [], []]
@@ -177,23 +202,24 @@ function columns() {
 
 //check duplicate of an array return duplicated numbers in an array
 function checkDuplicates(array) {
+  let newArray = [...array]
   let result = array.filter((value, index) => {
-    return array.indexOf(value) != index && value != 0
+    return newArray.indexOf(value) != index && value != 0
   })
   return result
 }
-//convert 9x9arrays in to a single 81 element array.
-function convertgameArray() {
+//convert 9box x 9 box  arrays in to a single 81 element array.
+function convertgameArray(array) {
   let newArray = []
   let row1 = rows()
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       if (row1[i][j] < 9) {
-        newArray.push(gameArray[0][row1[i][j]])
+        newArray.push(array[0][row1[i][j]])
       } else if (row1[i][j] >= 9) {
         let k = Math.floor(row1[i][j] / 9)
         let m = row1[i][j] % 9
-        newArray.push(gameArray[k][m])
+        newArray.push(array[k][m])
       }
     }
   }
@@ -246,24 +272,31 @@ for (let i = 0; i < bigblocks.length; i++) {
         if (keySelected != 0 && keySelected != 10) {
           gameArray[i][j] = keySelected
           bigblocks[i].children[j].style.color = 'orange'
-          bigblocks[i].children[j].classList.add('userSelected')
+          if (
+            bigblocks[i].children[j].classList.contains('userSelected') == false
+          ) {
+            bigblocks[i].children[j].classList.add('userSelected')
+          }
           bigblocks[i].children[j].innerHTML = keySelected
+          updatesArrays()
           checkWrong()
-          gameArray[i][j] = keySelected
+          // gameArray[i][j] = keySelected
           // set up delete button and unred the blocks that has no duplicates
         } else if (keySelected == 10) {
           bigblocks[i].children[j].innerHTML = ''
           bigblocks[i].children[j].style.color = 'black'
           gameArray[i][j] = 0
+          console.log(gameArray)
+
           bigblocks[i].children[j].classList.remove('userSelected')
           baiscBlocks.forEach((element) => {
             if (element.classList.contains('userSelected') == false) {
               element.style.color = 'black'
             } else if (element.classList.contains('userSelected') == true) {
-              element.style.color = 'orange'
+              //            element.style.color = 'orange'
             }
           })
-
+          updatesArrays()
           checkWrong()
         }
       }

@@ -1,6 +1,7 @@
 let gamestate = true
 let keySelected = 0
 //pre-fill the board and add preFilled class to them
+/*
 let preFillEasy = [
   [0, 4, 0, 0, 0, 5, 6, 3, 0],
   [5, 0, 0, 6, 0, 9, 0, 2, 7],
@@ -12,9 +13,22 @@ let preFillEasy = [
   [0, 0, 0, 1, 0, 5, 0, 0, 0],
   [4, 0, 0, 0, 0, 3, 9, 2, 0]
 ]
-
+*/
+let winningboard = [
+  [9, 4, 8, 2, 7, 5, 6, 3, 1],
+  [5, 3, 1, 6, 4, 9, 8, 2, 7],
+  [6, 7, 2, 8, 3, 1, 5, 4, 9],
+  [7, 5, 4, 1, 6, 9, 8, 2, 3],
+  [2, 1, 8, 7, 5, 3, 4, 9, 6],
+  [3, 9, 6, 2, 8, 4, 1, 5, 7],
+  [3, 8, 7, 4, 9, 2, 5, 1, 6],
+  [9, 6, 2, 1, 8, 5, 3, 7, 4],
+  [4, 1, 5, 7, 6, 3, 9, 2, 0]
+]
+let gameArray = winningboard
+let preFillEasy = winningboard
 // use gameArray to track game status
-
+/*
 let gameArray = [
   [0, 4, 0, 0, 0, 5, 6, 3, 0],
   [5, 0, 0, 6, 0, 9, 0, 2, 7],
@@ -26,8 +40,20 @@ let gameArray = [
   [0, 0, 0, 1, 0, 5, 0, 0, 0],
   [4, 0, 0, 0, 0, 3, 9, 2, 0]
 ]
+*/
 let gameArray81 = convertgameArray(gameArray)
 let rowArray = [
+  [0, 4, 0, 0, 0, 5, 6, 3, 0],
+  [5, 0, 0, 6, 0, 9, 0, 2, 7],
+  [0, 7, 0, 8, 3, 1, 5, 4, 0],
+  [7, 0, 4, 0, 6, 0, 0, 0, 0],
+  [0, 0, 0, 0, 5, 3, 0, 0, 6],
+  [0, 0, 6, 2, 8, 4, 0, 5, 0],
+  [3, 8, 7, 0, 0, 0, 5, 1, 6],
+  [0, 0, 0, 1, 0, 5, 0, 0, 0],
+  [4, 0, 0, 0, 0, 3, 9, 2, 0]
+]
+let columnArray = [
   [0, 4, 0, 0, 0, 5, 6, 3, 0],
   [5, 0, 0, 6, 0, 9, 0, 2, 7],
   [0, 7, 0, 8, 3, 1, 5, 4, 0],
@@ -140,9 +166,7 @@ function checkWrong() {
 
   //convert single 81 array to 9 row's array
   // let rowArray =gameArray
-  console.log(gameArray)
-  console.log(gameArray81)
-  console.log(rowArray)
+  // check each row for duplicates and highlights the duplicates
   for (let i = 0; i < 9; i++) {
     let duplicatesrow = checkDuplicates(rowArray[i])
     if (duplicatesrow.length > 0) {
@@ -159,15 +183,33 @@ function checkWrong() {
       }
     }
   }
+  //check each column for duplicates and highlight them
+  for (let i = 0; i < 9; i++) {
+    let duplicatescolumn = checkDuplicates(columnArray[i])
+    if (duplicatescolumn.length > 0) {
+      for (let j = 0; j < 9; j++) {
+        if (columnArray[i][j] == duplicatescolumn[0]) {
+          let k =
+            Math.floor(j / 3) * 27 +
+            (j % 3) * 3 +
+            Math.floor(i / 3) * 9 +
+            (i % 3)
+          console.log(k)
+          smallblocks[k].style.color = 'red'
+        }
+      }
+    }
+  }
 }
 
 function updatesArrays() {
   gameArray81 = convertgameArray(gameArray)
-  console.log(gameArray81)
+
   for (let i = 0; i < 81; i++) {
     let j = Math.floor(i / 9)
     let k = i % 9
     rowArray[j][k] = gameArray81[i]
+    columnArray[k][j] = gameArray81[i]
   }
 }
 // define row array
@@ -227,7 +269,35 @@ function convertgameArray(array) {
 }
 
 //checkwin checks winning situation
-function checkWin() {}
+function checkWin() {
+  let smallblocks = document.querySelectorAll('.block')
+  checkWrong()
+  /* 
+    Check if there is any red block, if there is no red block and you fillout all blocks
+    you win the game return a boolean
+    */
+  function allRed(array) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].style.color == 'red') {
+        return false
+      }
+    }
+    return true
+  }
+  //check win
+  for (let i = 0; i < 81; i++) {
+    if (smallblocks[i].innerHTML === '') {
+      return false
+    }
+  }
+  if (allRed(smallblocks) == true) {
+    console.log('You win')
+    smallblocks.forEach((element) => {
+      element.style.color = 'green'
+    })
+    return true
+  }
+}
 
 function prefill(array) {
   let bigblocks = document.querySelectorAll('.bigBlock')
@@ -280,6 +350,7 @@ for (let i = 0; i < bigblocks.length; i++) {
           bigblocks[i].children[j].innerHTML = keySelected
           updatesArrays()
           checkWrong()
+          checkWin()
           // gameArray[i][j] = keySelected
           // set up delete button and unred the blocks that has no duplicates
         } else if (keySelected == 10) {
@@ -298,6 +369,7 @@ for (let i = 0; i < bigblocks.length; i++) {
           })
           updatesArrays()
           checkWrong()
+          checkWin()
         }
       }
     })

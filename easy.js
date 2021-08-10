@@ -274,7 +274,7 @@ function checkWin() {
   checkWrong()
   /* 
     Check if there is any red block, if there is no red block and you fillout all blocks
-    you win the game return a boolean
+    you win the game ,return a boolean
     */
   function allRed(array) {
     for (let i = 0; i < array.length; i++) {

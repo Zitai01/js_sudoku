@@ -6,17 +6,28 @@ body{
     align-items: center;
     
 }
-
+h1{
+    font-family: 'Patrick Hand', cursive;
+    font-size: 52px;
+}
 .gameboard{
     width: 468px;
     height: 468px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: white;
+
    
 }
+.menu{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
 
+}
 .bigBlock{
     width: 153px;
     height: 153px;
@@ -40,15 +51,16 @@ body{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    border: solid 2px;
+  
+    margin: 30px
 }
 .keyblock{
     width: 48px;
     height: 48px;
     text-align: center;
     font-size: 40px;
-    border: solid 1px;
-    margin: 2px;
+    border: solid 1px ;
+    margin: 0px;
     transition-duration: 0.2s;
 }
 
@@ -60,3 +72,25 @@ button:hover {
   
     border-color: white;
   }
+
+#messageBar{
+    
+    text-align: center;
+    
+    font-size: 40px;
+}
+#levels{
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+}
+.level{
+    margin:30px;
+    background-color:chartreuse; 
+    font-size:35px
+}
+a{
+    text-decoration: none;
+}

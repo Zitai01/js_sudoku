@@ -31,6 +31,98 @@ let winningboard = [
   [9, 6, 2, 1, 8, 5, 3, 7, 4],
   [4, 1, 5, 7, 6, 3, 9, 2, 0]
 ]
+let easy2 = [
+  [0, 0, 0, 1, 0, 0, 0, 0, 9],
+  [0, 0, 0, 0, 6, 0, 0, 3, 0],
+  [0, 0, 0, 5, 0, 8, 0, 0, 6],
+  [0, 0, 0, 0, 5, 0, 0, 0, 0],
+  [0, 0, 6, 0, 0, 1, 7, 0, 4],
+  [0, 8, 0, 0, 6, 2, 1, 3, 5],
+  [7, 0, 2, 8, 0, 1, 9, 0, 5],
+  [0, 1, 8, 9, 0, 2, 0, 0, 0],
+  [0, 9, 0, 0, 5, 7, 8, 0, 1]
+]
+let easy3 = [
+  [0, 0, 0, 1, 0, 0, 6, 0, 0],
+  [0, 0, 0, 0, 0, 8, 4, 0, 0],
+  [0, 0, 0, 0, 7, 0, 1, 2, 3],
+  [0, 1, 0, 4, 5, 6, 7, 0, 9],
+  [5, 4, 0, 0, 0, 0, 0, 0, 2],
+  [0, 9, 8, 2, 0, 0, 0, 5, 6],
+  [5, 0, 3, 0, 0, 0, 9, 0, 1],
+  [0, 8, 1, 0, 2, 4, 3, 0, 0],
+  [0, 0, 7, 3, 1, 0, 0, 0, 0]
+]
+
+let medium1 = [
+  [0, 0, 0, 0, 2, 3, 0, 0, 0],
+  [0, 8, 0, 0, 0, 0, 0, 2, 0],
+  [0, 0, 0, 0, 0, 9, 0, 0, 0],
+  [0, 1, 4, 3, 0, 5, 6, 8, 0],
+  [0, 6, 0, 2, 9, 8, 0, 1, 0],
+  [0, 0, 8, 0, 0, 6, 0, 2, 0],
+  [5, 3, 0, 0, 4, 0, 0, 9, 0],
+  [8, 4, 6, 9, 3, 1, 0, 7, 2],
+  [0, 7, 2, 8, 0, 0, 4, 3, 0]
+]
+
+let medium2 = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [8, 0, 0, 0, 0, 0, 3, 0, 7],
+  [0, 0, 3, 7, 0, 9, 0, 2, 0],
+  [0, 2, 3, 4, 5, 0, 8, 9, 0],
+  [0, 0, 5, 7, 0, 0, 0, 1, 3],
+  [0, 0, 7, 2, 0, 1, 0, 0, 5],
+  [3, 1, 0, 5, 0, 0, 0, 0, 8],
+  [0, 7, 8, 0, 0, 0, 0, 0, 4],
+  [0, 4, 0, 3, 7, 0, 0, 1, 2]
+]
+
+let medium3 = [
+  [0, 0, 2, 0, 0, 0, 0, 8, 0],
+  [0, 9, 3, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 9, 2, 0, 0],
+  [0, 0, 0, 5, 4, 7, 0, 9, 8],
+  [0, 0, 0, 3, 0, 9, 0, 0, 0],
+  [0, 9, 0, 0, 0, 2, 3, 4, 0],
+  [0, 2, 1, 8, 6, 0, 0, 7, 5],
+  [5, 6, 0, 9, 0, 1, 0, 3, 0],
+  [9, 8, 0, 0, 7, 0, 6, 0, 1]
+]
+
+let hard1 = [
+  [0, 0, 0, 0, 3, 0, 6, 0, 8],
+  [7, 0, 0, 0, 0, 6, 3, 5, 0],
+  [5, 0, 0, 7, 8, 9, 0, 0, 4],
+  [0, 0, 0, 4, 0, 6, 7, 8, 0],
+  [0, 6, 0, 8, 9, 0, 0, 0, 3],
+  [0, 0, 7, 2, 0, 3, 0, 0, 0],
+  [0, 0, 1, 5, 6, 2, 8, 0, 0],
+  [6, 0, 2, 9, 8, 0, 0, 3, 1],
+  [0, 0, 0, 0, 7, 0, 6, 0, 0]
+]
+let hard2 = [
+  [2, 0, 6, 1, 0, 0, 0, 0, 0],
+  [0, 7, 0, 0, 0, 0, 0, 0, 8],
+  [0, 0, 1, 0, 7, 8, 2, 0, 0],
+  [0, 1, 0, 0, 5, 0, 6, 0, 8],
+  [4, 0, 6, 8, 0, 1, 3, 0, 0],
+  [0, 8, 0, 0, 6, 0, 1, 5, 4],
+  [0, 2, 0, 8, 0, 0, 0, 0, 0],
+  [6, 0, 3, 0, 1, 5, 0, 8, 0],
+  [8, 0, 5, 0, 0, 7, 4, 1, 3]
+]
+let hard3 = [
+  [3, 0, 0, 1, 2, 0, 5, 0, 0],
+  [1, 0, 0, 3, 0, 8, 2, 7, 0],
+  [0, 0, 0, 0, 7, 9, 0, 0, 4],
+  [0, 0, 3, 0, 5, 0, 8, 9, 0],
+  [0, 0, 0, 0, 9, 1, 0, 2, 3],
+  [8, 0, 7, 0, 6, 3, 4, 1, 0],
+  [6, 0, 1, 0, 0, 5, 9, 8, 2],
+  [5, 0, 0, 0, 0, 2, 6, 0, 0],
+  [0, 0, 0, 3, 0, 0, 0, 5, 0]
+]
 let gameArray = winningboard
 let preFillEasy = winningboard
 // use gameArray to track game status
@@ -99,6 +191,7 @@ replayButton.addEventListener('click', async () => {
 
   baiscBlocks.forEach((element) => {
     element.style.color = 'black'
+    element.style.backgroundColor = 'darkgray'
   })
 
   updatesArrays()
@@ -106,6 +199,7 @@ replayButton.addEventListener('click', async () => {
   popupBar.style.display = 'none'
   gamestate = true
   // load the solution from api that can be used for hint
+  /*
   const encodeBoard = (board) =>
     board.reduce(
       (result, row, i) =>
@@ -134,6 +228,7 @@ replayButton.addEventListener('click', async () => {
     )
     //  .then((response) => response.json())
     .then((response) => console.log(response))
+    */
 })
 
 let gameboard = document.querySelector('.gameboard')
@@ -334,7 +429,7 @@ function checkWin() {
   if (allRed(smallblocks) == true) {
     console.log('You win')
     userScore += 1
-    scoreBar.innerHTML = userScore
+    scoreBar.innerHTML = 'Score: ' + `${userScore}`
 
     smallblocks.forEach((element) => {
       element.style.color = 'green'
@@ -412,11 +507,9 @@ for (let i = 0; i < bigblocks.length; i++) {
       ) {
         if (keySelected != 0 && keySelected != 10) {
           gameArray[i][j] = keySelected
-          /*for (let k = 0; k < 81; k++) {
-            if (bigblocks[i].children[j] === basicBlocks[k]) {
-              basicBlocks[i].style.backgroundColor = 'orange'
-            }
-          }*/
+
+          baiscBlocks[i * 9 + j].style.backgroundColor = 'rgba(255,165,0,0.2)'
+
           bigblocks[i].children[j].style.color = 'orange'
           if (
             bigblocks[i].children[j].classList.contains('userSelected') == false
@@ -434,13 +527,13 @@ for (let i = 0; i < bigblocks.length; i++) {
           bigblocks[i].children[j].style.color = 'black'
           gameArray[i][j] = 0
           console.log(gameArray)
-
+          baiscBlocks[i * 9 + j].style.backgroundColor = 'darkgray'
           bigblocks[i].children[j].classList.remove('userSelected')
           baiscBlocks.forEach((element) => {
             if (element.classList.contains('userSelected') == false) {
               element.style.color = 'black'
             } else if (element.classList.contains('userSelected') == true) {
-              //            element.style.color = 'orange'
+              element.style.color = 'orange'
             }
           })
           updatesArrays()
@@ -451,4 +544,14 @@ for (let i = 0; i < bigblocks.length; i++) {
     })
   }
 }
+//eventlistner for levels button and it's exit
+let chooseLevel = document.querySelector('.selectLevel')
+let popupLevel = document.querySelector('.popupLevel')
+let exitPopup = document.querySelector('.displayNone')
+chooseLevel.addEventListener('click', () => {
+  popupLevel.style.display = 'block'
+})
+exitPopup.addEventListener('click', () => {
+  popupLevel.style.display = 'none'
+})
 //testing stuff

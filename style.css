@@ -10,7 +10,7 @@ body{
 h1{
     font-family: 'Patrick Hand', cursive;
     font-size: 52px;
-    margin: 30px 0 60px 0;
+    margin: 25px 0 35px 0;
 }
 .gameboard{
     width: 471px;
@@ -88,6 +88,23 @@ button:hover {
     justify-content: center;
   
 }
+.levels{
+    width: 240px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  
+}
+.popupLevel{
+    display: none;
+    position: absolute;
+    top: 320px;
+    background-color: rgba(32, 178, 170,1.0);
+    border: solid 2px white;
+    font-size: 22px;
+    padding: 10px;
+}
 .level{
     margin:30px;
     
@@ -115,7 +132,7 @@ nav{
     display: none;
     flex-direction: column;
     top: 320px;
-    background-color: lightseagreen;
+    background-color: rgba(32, 178, 170,0.8);
     text-align: center;
     margin: 20px;
     font-size: 42px;
@@ -125,7 +142,31 @@ nav{
     font-family: 'Patrick Hand', cursive;
     display: flex;
     margin: 25px 20px 10px 20px;
+    align-items: center;
+    justify-content: center;
 }
-.userSelected{
-    background-color: skyblue;
+.replay{
+    text-align: center;
+}
+
+.buttons{
+    margin-top: 0;
+    background-color: rgba(255, 255, 255,0.4);
+    border-radius: 6px;
+    padding: 3px;
+    font-size: 20px;
+}
+.utilityBar{
+    display: flex;
+align-items: flex-start;
+width: 470px;
+margin-bottom: 5px;
+justify-content: space-between;
+}
+.utilityBar:last-child{
+    margin-left: auto;
+}
+.exitPopup{
+    display: flex;
+    justify-content: space-between;
 }

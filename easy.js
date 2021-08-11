@@ -70,7 +70,8 @@ let columnArray = [
   [0, 0, 0, 1, 0, 5, 0, 0, 0],
   [4, 0, 0, 0, 0, 3, 9, 2, 0]
 ]
-//get a random board from API
+//get a random board from API,convert the board format into my format
+// and restart the game with newboard
 const replayButton = document.querySelector('.replay')
 replayButton.addEventListener('click', async () => {
   const response =
@@ -78,7 +79,61 @@ replayButton.addEventListener('click', async () => {
     `)
   let random_board = response.data.board
   console.log(random_board)
-  return random_board
+  let new_board81 = []
+  //transpose the board into the 81format
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      let k =
+        Math.floor(i / 3) * 27 + (i % 3) * 3 + Math.floor(j / 3) * 9 + (j % 3)
+      new_board81[k] = random_board[i][j]
+    }
+  }
+  console.log(new_board81)
+  //then transpose to my 9x9 format and updates the gameArray
+  for (let i = 0; i < 81; i++) {
+    let j = Math.floor(i / 9)
+    let k = i % 9
+    gameArray[j][k] = new_board81[i]
+  }
+  console.log(gameArray)
+
+  baiscBlocks.forEach((element) => {
+    element.style.color = 'black'
+  })
+
+  updatesArrays()
+  prefill(gameArray)
+  popupBar.style.display = 'none'
+  gamestate = true
+  // load the solution from api that can be used for hint
+  const encodeBoard = (board) =>
+    board.reduce(
+      (result, row, i) =>
+        result +
+        `%5B${encodeURIComponent(row)}%5D${
+          i === board.length - 1 ? '' : '%2C'
+        }`,
+      ''
+    )
+
+  const encodeParams = (params) =>
+    Object.keys(params)
+      .map((key) => key + '=' + `%5B${encodeBoard(params[key])}%5D`)
+      .join('&')
+  let board = { board: random_board }
+  let data = {
+    body: encodeParams(board),
+    headers: { 'Content-Type': 'text/plain' }
+  }
+
+  await axios
+    .post(
+      `https://sugoku.herokuapp.com/solve
+  `,
+      data
+    )
+    //  .then((response) => response.json())
+    .then((response) => console.log(response))
 })
 
 let gameboard = document.querySelector('.gameboard')
@@ -149,12 +204,9 @@ function checkWrong() {
       //     return duplicas
     }
   }
-  //check each row and column for duplicates
-  //let row = rows()
-  //let column = columns()
 
   //convert single 81 array to 9 row's array
-  // let rowArray =gameArray
+
   // check each row for duplicates and highlights the duplicates
   for (let i = 0; i < 9; i++) {
     let duplicatesrow = checkDuplicates(rowArray[i])
@@ -360,6 +412,11 @@ for (let i = 0; i < bigblocks.length; i++) {
       ) {
         if (keySelected != 0 && keySelected != 10) {
           gameArray[i][j] = keySelected
+          /*for (let k = 0; k < 81; k++) {
+            if (bigblocks[i].children[j] === basicBlocks[k]) {
+              basicBlocks[i].style.backgroundColor = 'orange'
+            }
+          }*/
           bigblocks[i].children[j].style.color = 'orange'
           if (
             bigblocks[i].children[j].classList.contains('userSelected') == false

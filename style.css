@@ -126,3 +126,6 @@ nav{
     display: flex;
     margin: 25px 20px 10px 20px;
 }
+.userSelected{
+    background-color: skyblue;
+}

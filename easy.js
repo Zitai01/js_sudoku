@@ -3,6 +3,9 @@ let keySelected = 0
 let userScore = 0
 let scoreBar = document.querySelector('.scoreBar')
 let popupBar = document.querySelector('.popup')
+const apiDOmain = 'https://sugoku.herokuapp.com/'
+const difficulty = 'board?difficulty=easy'
+
 //pre-fill the board and add preFilled class to them
 /*
 let preFillEasy = [
@@ -67,6 +70,16 @@ let columnArray = [
   [0, 0, 0, 1, 0, 5, 0, 0, 0],
   [4, 0, 0, 0, 0, 3, 9, 2, 0]
 ]
+//get a random board from API
+const replayButton = document.querySelector('.replay')
+replayButton.addEventListener('click', async () => {
+  const response =
+    await axios.get(`https://sugoku.herokuapp.com/board?difficulty=easy
+    `)
+  let random_board = response.data.board
+  console.log(random_board)
+  return random_board
+})
 
 let gameboard = document.querySelector('.gameboard')
 console.log(gameboard)
@@ -114,28 +127,6 @@ function initBoard() {
 
 initBoard()
 
-//not used anymore.
-/*function checkWrong1() {
-  //check each bigblock if it has duplicate numbers
-  let bigblocks = document.querySelectorAll('.bigBlock')
-  let checkbox = []
-  for (let i = 0; i < 9; i++) {
-    checkbox = []
-    for (let j = 0; j < 9; j++) {
-      if (checkbox.includes(gameArray[i][j])) {
-        if (bigblocks[i].children[j].classList.contains('preFilled')) {
-        } else {
-          bigblocks[i].children[j].style.color = 'red'
-          console.log([i, j])
-          return [i, j]
-        }
-      } else if (gameArray[i][j] != 0) {
-        checkbox.push(gameArray[i][j])
-      }
-    }
-  }
-}
-*/
 //checkwrong will makes any conlict numbers red
 //new simpilified checkwrong with filter function
 function checkWrong() {
@@ -304,11 +295,15 @@ function checkWin() {
     return true
   }
 }
-
+//prefill or refill the board with array or array(in a special format).
 function prefill(array) {
   let bigblocks = document.querySelectorAll('.bigBlock')
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
+      bigblocks[i].children[j].innerHTML = ''
+      if (bigblocks[i].children[j].classList.contains('preFilled')) {
+        bigblocks[i].children[j].classList.remove('preFilled')
+      }
       if (array[i][j] != 0) {
         bigblocks[i].children[j].innerHTML = array[i][j]
         bigblocks[i].children[j].classList.add('preFilled')

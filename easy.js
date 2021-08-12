@@ -246,11 +246,9 @@ function initBoard() {
   for (let i = 0; i < 10; i++) {
     let block = document.createElement('button')
     block.classList.add('keyblock')
-    if (i % 2 == 0) {
-      block.style.backgroundColor = 'darkgray'
-    } else if (i % 2 == 1) {
-      block.style.backgroundColor = 'gray'
-    }
+    i
+    block.style.backgroundColor = 'darkgray'
+
     block.innerHTML = `${i + 1}`
     keyboard.appendChild(block)
   }
@@ -270,7 +268,7 @@ function checkWrong() {
     if (duplicatesArray.length > 0) {
       for (let j = 0; j < 9; j++) {
         if (gameArray[i][j] == duplicatesArray[0]) {
-          bigblocks[i].children[j].style.color = 'red'
+          bigblocks[i].children[j].style.color = 'rgb(226, 74, 54)'
 
           //        duplicas.push([i, j])
         }
@@ -294,7 +292,7 @@ function checkWrong() {
             Math.floor(j / 3) * 9 +
             (j % 3)
 
-          smallblocks[k].style.color = 'red'
+          smallblocks[k].style.color = 'rgb(226, 74, 54)'
         }
       }
     }
@@ -311,7 +309,7 @@ function checkWrong() {
             Math.floor(i / 3) * 9 +
             (i % 3)
 
-          smallblocks[k].style.color = 'red'
+          smallblocks[k].style.color = 'rgb(226, 74, 54)'
         }
       }
     }
@@ -394,7 +392,7 @@ function checkWin() {
     */
   function allRed(array) {
     for (let i = 0; i < array.length; i++) {
-      if (array[i].style.color == 'red') {
+      if (array[i].style.color == 'rgb(226, 74, 54)') {
         return false
       }
     }
@@ -412,7 +410,7 @@ function checkWin() {
     scoreBar.innerHTML = 'Score: ' + `${userScore}`
 
     smallblocks.forEach((element) => {
-      element.style.color = 'green'
+      element.style.color = `rgb(184, 241, 27)`
     })
     gamestate = false
     setTimeout(() => {
@@ -449,7 +447,7 @@ for (let i = 0; i < 10; i++) {
       element.style.color = 'black'
     })
 
-    keyBlocks[i].style.color = 'yellowgreen'
+    keyBlocks[i].style.color = 'rgb(184, 241, 27)'
   })
 }
 //Add 'keydown' eventlisteners
@@ -461,13 +459,13 @@ body.addEventListener('keydown', (e) => {
       keyBlocks.forEach((element) => {
         element.style.color = 'black'
       })
-      keyBlocks[i - 1].style.color = 'yellowgreen'
+      keyBlocks[i - 1].style.color = 'rgb(167, 221, 20)'
     } else if (e.code == 'Backquote') {
       keySelected = 10
       keyBlocks.forEach((element) => {
         element.style.color = 'black'
       })
-      keyBlocks[9].style.color = 'yellowgreen'
+      keyBlocks[9].style.color = 'rgb(167, 221, 20)'
     }
   }
 })

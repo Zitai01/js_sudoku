@@ -13,7 +13,7 @@ if (messageBar.innerHTML == 'Press here to start the game!') {
       x = 1
     }
 
-    messageBar.style.color = `rgba(0,0,0,${Math.abs(x)})`
+    messageBar.style.color = `rgba(184,241,27,${Math.abs(x)})`
   }, 30)
 }
 
@@ -22,7 +22,7 @@ if (messageBar.innerHTML == 'Press here to start the game!') {
 messageBar.addEventListener('click', (e) => {
   if (messageBar.innerHTML == 'Press here to start the game!') {
     clearInterval(`1`)
-    messageBar.style.color = `rgba(0,0,0,1)`
+    messageBar.style.color = `rgba(184, 241, 27,1)`
     messageBar.innerHTML = 'Choos a difficulty:'
     levelButtons.style.display = 'flex'
   }

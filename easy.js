@@ -137,7 +137,7 @@ let hard3 = [
 //prefill the board with difficuly setting of the page
 initBoard()
 let titles = document.querySelector('title')
-console.log(titles)
+
 if (titles.innerHTML == `Sudoku Medium`) {
   difficulty = `medium`
   gameArray = medium1
@@ -152,10 +152,7 @@ if (titles.innerHTML == `Sudoku Medium`) {
   difficulty = `easy`
   gameArray = winningboard
   prefill(winningboard)
-  console.log(`easy level`)
 }
-
-//prefill(easy1)
 
 let gameArray81 = convertgameArray(gameArray)
 
@@ -189,7 +186,7 @@ replayButton.addEventListener('click', async () => {
     await axios.get(`https://sugoku.herokuapp.com/board?difficulty=${difficulty}
     `)
   let random_board = response.data.board
-  console.log(random_board)
+
   let new_board81 = []
   //transpose the board into the 81format
   for (let i = 0; i < 9; i++) {
@@ -199,14 +196,13 @@ replayButton.addEventListener('click', async () => {
       new_board81[k] = random_board[i][j]
     }
   }
-  console.log(new_board81)
+
   //then transpose to my 9x9 format and updates the gameArray
   for (let i = 0; i < 81; i++) {
     let j = Math.floor(i / 9)
     let k = i % 9
     gameArray[j][k] = new_board81[i]
   }
-  console.log(gameArray)
 
   baiscBlocks.forEach((element) => {
     element.style.color = 'black'
@@ -214,8 +210,6 @@ replayButton.addEventListener('click', async () => {
   })
 
   updatesArrays()
-  //prefill the board by difficuly
-
   prefill(gameArray)
   popupBar.style.display = 'none'
   gamestate = true
@@ -243,7 +237,6 @@ function initBoard() {
 
       block.style.backgroundColor = 'darkgray'
 
-      //block.innerHTML = `${j}`
       largerBlocks[i].appendChild(block)
     }
   }
@@ -516,13 +509,13 @@ for (let i = 0; i < bigblocks.length; i++) {
           updatesArrays()
           checkWrong()
           checkWin()
-          // gameArray[i][j] = keySelected
+
           // set up delete button and unred the blocks that has no duplicates
         } else if (keySelected == 10) {
           bigblocks[i].children[j].innerHTML = ''
           bigblocks[i].children[j].style.color = 'black'
           gameArray[i][j] = 0
-          console.log(gameArray)
+
           baiscBlocks[i * 9 + j].style.backgroundColor = 'darkgray'
           bigblocks[i].children[j].classList.remove('userSelected')
           baiscBlocks.forEach((element) => {
@@ -540,6 +533,13 @@ for (let i = 0; i < bigblocks.length; i++) {
     })
   }
 }
+//Creative mode, build your own sudoku ~~
+let creativeButton = document.querySelector('.creative')
+
+creativeButton.addEventListener('click', () => {
+  gameArray = emptyboard
+  prefill(gameArray)
+})
 //eventlistner for levels button and it's exit
 let chooseLevel = document.querySelector('.selectLevel')
 let popupLevel = document.querySelector('.popupLevel')
@@ -550,4 +550,3 @@ chooseLevel.addEventListener('click', () => {
 exitPopup.addEventListener('click', () => {
   popupLevel.style.display = 'none'
 })
-//testing stuff

@@ -213,6 +213,7 @@ replayButton.addEventListener('click', async () => {
   prefill(gameArray)
   popupBar.style.display = 'none'
   gamestate = true
+  refreshTimer()
 })
 
 //Initialize the gameboard with 3x3 larger blocks
@@ -549,4 +550,33 @@ chooseLevel.addEventListener('click', () => {
 })
 exitPopup.addEventListener('click', () => {
   popupLevel.style.display = 'none'
+})
+//Countdown timer,click to hide
+let secs = 0
+let mins = 15
+let countdown = document.querySelector('.countdown')
+function refreshTimer() {
+  secs = 0
+  mins = 15
+}
+
+let intervalID = setInterval(() => {
+  if (secs == 0) {
+    mins -= 1
+    secs = 60
+  }
+  secs -= 1
+  countdown.innerHTML = `${mins}:${secs}`
+  if (secs == 0 && mins == 0) {
+    alert(`Times up!`)
+    refreshTimer()
+  }
+}, 1000)
+
+countdown.addEventListener('click', () => {
+  if (countdown.innerHTML.color == `1`) {
+    countdown.innerHTML.color = `rgba(255, 255, 255,1)`
+  } else {
+    countdown.innerHTML.color = `rgba(255, 255, 255,0.4)`
+  }
 })

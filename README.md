@@ -35,17 +35,17 @@ JS_sudoku will be a single player sudoku game made by using CSS,JaveScript and H
 ## Project requirements 
 - [X] Be a new repo. Create a new repo in your GitHub and buiproject 
 - [X] there. DO NOT name your repository Project 1. Give it a real name.
-- [ ] Include a beautiful, professional README.md (use markdown)
-- [ ] Utilize flexbox or grid (or both)
-- [ ] Include a minimum of 2 HTML pages and navigation between them
-- [ ] Include a minimum of 2 event handlers
-- [ ] Have at least 20 meaningful git commits. You should be committing - [ ] your changes every time you build a new feature.
-- [ ] Your code should be properly indented, spaced, and within code blocks. DO NOT leave in commented out code that was left unused (bad practice). Comments, if in your code at all, should be in your code to describe what your functions are doing.
-- [ ] Display proper use of global variables and function parameters (function scopes)
-- [ ] Use camelCase for JavaScript variables
-- [ ] Be deployed on Surge (We will cover this on Thursday of project week)
+- [X] Include a beautiful, professional README.md (use markdown)
+- [X] Utilize flexbox or grid (or both)
+- [X] Include a minimum of 2 HTML pages and navigation between them
+- [X] Include a minimum of 2 event handlers
+- [X] Have at least 20 meaningful git commits. You should be committing - [ ] your changes every time you build a new feature.
+- [X] Your code should be properly indented, spaced, and within code blocks. DO NOT leave in commented out code that was left unused (bad practice). Comments, if in your code at all, should be in your code to describe what your functions are doing.
+- [X] Display proper use of global variables and function parameters (function scopes)
+- [X] Use camelCase for JavaScript variables
+- [X] Be deployed on Surge (We will cover this on Thursday of project week)
 ## Credits
-
+Thanks https://github.com/bertoort/sugoku offer API for generating random Sudoku datebase.
 
 
 

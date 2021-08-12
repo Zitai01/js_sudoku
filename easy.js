@@ -207,6 +207,9 @@ replayButton.addEventListener('click', async () => {
   baiscBlocks.forEach((element) => {
     element.style.color = 'black'
     element.style.backgroundColor = 'darkgray'
+    if (element.classList.contains(`userSelected`) == true) {
+      element.classList.remove(`userSelected`)
+    }
   })
 
   updatesArrays()

@@ -116,11 +116,7 @@ button:hover {
 a{
     text-decoration: none;
 }
-nav{
-    display: flex;
-    justify-content: center;
-    
-}
+
 .topBar{
     margin: 10px;
     margin-right: 5px;
@@ -173,6 +169,10 @@ justify-content: space-between;
     display: flex;
     justify-content: space-between;
 }
-.countdown{
-   
+.timer{
+   display: flex;
+  
+}
+.hidetime{
+    display: none;
 }

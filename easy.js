@@ -555,6 +555,7 @@ exitPopup.addEventListener('click', () => {
 let secs = 0
 let mins = 15
 let countdown = document.querySelector('.countdown')
+let hidetime = document.querySelector(`.hidetime`)
 function refreshTimer() {
   secs = 0
   mins = 15
@@ -574,9 +575,10 @@ let intervalID = setInterval(() => {
 }, 1000)
 
 countdown.addEventListener('click', () => {
-  if (countdown.innerHTML.color == `1`) {
-    countdown.innerHTML.color = `rgba(255, 255, 255,1)`
-  } else {
-    countdown.innerHTML.color = `rgba(255, 255, 255,0.4)`
-  }
+  countdown.style.display = `none`
+  hidetime.style.display = 'inline'
+})
+hidetime.addEventListener('click', () => {
+  countdown.style.display = `inline`
+  hidetime.style.display = `none`
 })

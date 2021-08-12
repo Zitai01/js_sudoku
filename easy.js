@@ -506,6 +506,17 @@ for (let i = 0; i < bigblocks.length; i++) {
         bigblocks[i].children[j].classList.contains('preFilled') == false
       ) {
         if (keySelected != 0 && keySelected != 10) {
+          if (gameArray[i][j] != 0) {
+            gameArray[i][j] = keySelected
+            baiscBlocks.forEach((element) => {
+              if (element.classList.contains('userSelected') == false) {
+                element.style.color = 'black'
+              } else if (element.classList.contains('userSelected') == true) {
+                element.style.color = 'orange'
+              }
+            })
+          }
+
           gameArray[i][j] = keySelected
 
           baiscBlocks[i * 9 + j].style.backgroundColor = 'rgba(255,165,0,0.2)'

@@ -78,7 +78,7 @@ button:hover {
 #messageBar{
     
     text-align: center;
-    
+    color: rgba(0, 0, 0,1);
     font-size: 40px;
 }
 #levels{

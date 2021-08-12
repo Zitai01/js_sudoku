@@ -4,11 +4,22 @@ let userScore = 0
 let scoreBar = document.querySelector('.scoreBar')
 let popupBar = document.querySelector('.popup')
 const apiDOmain = 'https://sugoku.herokuapp.com/'
-const difficulty = 'board?difficulty=easy'
+let difficulty = 'easy'
+let gameboard = document.querySelector('.gameboard')
+let emptyboard = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+let gameArray = emptyboard
 
-//pre-fill the board and add preFilled class to them
-/*
-let preFillEasy = [
+let easy1 = [
   [0, 4, 0, 0, 0, 5, 6, 3, 0],
   [5, 0, 0, 6, 0, 9, 0, 2, 7],
   [0, 7, 0, 8, 3, 1, 5, 4, 0],
@@ -19,7 +30,7 @@ let preFillEasy = [
   [0, 0, 0, 1, 0, 5, 0, 0, 0],
   [4, 0, 0, 0, 0, 3, 9, 2, 0]
 ]
-*/
+
 let winningboard = [
   [9, 4, 8, 2, 7, 5, 6, 3, 1],
   [5, 3, 1, 6, 4, 9, 8, 2, 7],
@@ -123,23 +134,31 @@ let hard3 = [
   [5, 0, 0, 0, 0, 2, 6, 0, 0],
   [0, 0, 0, 3, 0, 0, 0, 5, 0]
 ]
-let gameArray = winningboard
-let preFillEasy = winningboard
-// use gameArray to track game status
-/*
-let gameArray = [
-  [0, 4, 0, 0, 0, 5, 6, 3, 0],
-  [5, 0, 0, 6, 0, 9, 0, 2, 7],
-  [0, 7, 0, 8, 3, 1, 5, 4, 0],
-  [7, 0, 4, 0, 6, 0, 0, 0, 0],
-  [0, 0, 0, 0, 5, 3, 0, 0, 6],
-  [0, 0, 6, 2, 8, 4, 0, 5, 0],
-  [3, 8, 7, 0, 0, 0, 5, 1, 6],
-  [0, 0, 0, 1, 0, 5, 0, 0, 0],
-  [4, 0, 0, 0, 0, 3, 9, 2, 0]
-]
-*/
+//prefill the board with difficuly setting of the page
+initBoard()
+let titles = document.querySelector('title')
+console.log(titles)
+if (titles.innerHTML == `Sudoku Medium`) {
+  difficulty = `medium`
+  gameArray = medium1
+  prefill(medium1)
+  console.log(`medium level`)
+} else if (titles.innerHTML == `Sudoku Hard`) {
+  difficulty = `hard`
+  gameArray = hard1
+  prefill(hard1)
+  console.log(`hard level`)
+} else if (titles.innerHTML == `Sudoku Easy`) {
+  difficulty = `easy`
+  gameArray = winningboard
+  prefill(winningboard)
+  console.log(`easy level`)
+}
+
+//prefill(easy1)
+
 let gameArray81 = convertgameArray(gameArray)
+
 let rowArray = [
   [0, 4, 0, 0, 0, 5, 6, 3, 0],
   [5, 0, 0, 6, 0, 9, 0, 2, 7],
@@ -167,7 +186,7 @@ let columnArray = [
 const replayButton = document.querySelector('.replay')
 replayButton.addEventListener('click', async () => {
   const response =
-    await axios.get(`https://sugoku.herokuapp.com/board?difficulty=easy
+    await axios.get(`https://sugoku.herokuapp.com/board?difficulty=${difficulty}
     `)
   let random_board = response.data.board
   console.log(random_board)
@@ -195,44 +214,13 @@ replayButton.addEventListener('click', async () => {
   })
 
   updatesArrays()
+  //prefill the board by difficuly
+
   prefill(gameArray)
   popupBar.style.display = 'none'
   gamestate = true
-  // load the solution from api that can be used for hint
-  /*
-  const encodeBoard = (board) =>
-    board.reduce(
-      (result, row, i) =>
-        result +
-        `%5B${encodeURIComponent(row)}%5D${
-          i === board.length - 1 ? '' : '%2C'
-        }`,
-      ''
-    )
-
-  const encodeParams = (params) =>
-    Object.keys(params)
-      .map((key) => key + '=' + `%5B${encodeBoard(params[key])}%5D`)
-      .join('&')
-  let board = { board: random_board }
-  let data = {
-    body: encodeParams(board),
-    headers: { 'Content-Type': 'text/plain' }
-  }
-
-  await axios
-    .post(
-      `https://sugoku.herokuapp.com/solve
-  `,
-      data
-    )
-    //  .then((response) => response.json())
-    .then((response) => console.log(response))
-    */
 })
 
-let gameboard = document.querySelector('.gameboard')
-console.log(gameboard)
 //Initialize the gameboard with 3x3 larger blocks
 //and 3x3 small blocks in each larger blocks
 //then initialize the keyboard
@@ -274,8 +262,6 @@ function initBoard() {
   }
   keyboard.children[9].innerHTML = 'X'
 }
-
-initBoard()
 
 //checkwrong will makes any conlict numbers red
 //new simpilified checkwrong with filter function
@@ -458,7 +444,6 @@ function prefill(array) {
     }
   }
 }
-prefill(preFillEasy)
 
 //Add 'click' eventlisteners to keyboard store it's value in a variable
 // and highlight the selected value.

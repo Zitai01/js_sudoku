@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,9 +12,56 @@
     <title>Sudoku Hard</title>
 </head>
 <body>
-    <nav><h1>Sudoku</h1></nav>
+    <!--<nav>
+        <div class="topBar">Time left:</div>
+        <div class="topBar"></div>
+        <div class="topBar">Score:</div>
+        <div class="topBar scoreBar">0</div>
+        
+    </nav> -->
+    <h1>Sudoku.ZT</h1>
+    <div class='utilityBar'>
+        <div class='buttons selectLevel'>Levels</div>
+        <div class='buttons menus'><a href="index.html">menu</a></div>
+        <div class='buttons creative'>Creat mode</div>
+        <div class='buttons scoreBar'>Score: 0</div>
+    </div>
     <div class = 'gameboard'></div>
     <div class = 'keyboard'></div>
+    <div class="popup">
+        <div class="inside_popup">Congratualation, you made it!</div>
+        <div class="inside_popup"> 
+            <div class="level replay">Go next!</div>
+           
+        </div>
+        
+    </div>
+    <div class="popupLevel">
+        <div class="exitPopup">
+            <div>Easy</div>
+            <div class="displayNone">X</div>
+        </div>
+        <div class='levels'>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        
+        <div >Medium</div>
+        <div class='levels'>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+        <div >Hard</div>
+        <div class='levels'>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+    </div>
 </body>
-<script src="easy.js"></script>
+ 
+<script defer src="easy.js"></script>
+
 </html>

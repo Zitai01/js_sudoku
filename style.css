@@ -7,6 +7,9 @@ body{
     align-items: center;
     
 }
+.selectLevel{
+    display: none;
+}
 h1{
     font-family: 'Patrick Hand', cursive;
     font-size: 52px;
